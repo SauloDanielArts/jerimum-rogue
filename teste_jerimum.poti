@@ -1,0 +1,71 @@
+use "jerimum"
+
+
+#classe que define o persoangem do jogador
+tipo Jogador
+  var x, y, vida: Inteiro
+  var sprite = Imagem("")
+  var folha_de_sprite = Imagem("")
+  
+  atualize_x(nx: Inteiro)
+  	x := nx
+  fim
+  
+  atualize_y(ny: Inteiro)
+  	y := ny
+  fim
+  
+  atualize_movimento()
+  	
+ 	se Teclado.TECLA_PARA_DIREITA então
+      	atualize_x(x + 1)
+      	#escreva "TECLA_PARA_DIREITA"
+ 	fim
+ 
+ 	se Teclado.TECLA_PARA_ESQUERDA então
+      	atualize_x(x - 1)
+      	#escreva "TECLA_PARA_ESQUERDA"
+ 	fim
+ 
+  	se Teclado.TECLA_PARA_CIMA então
+      	atualize_y(y - 1)
+      	#escreva "TECLA_PARA_CIMA"
+ 	fim
+ 
+ 	se Teclado.TECLA_PARA_BAIXO então
+      	atualize_y(y + 1)
+      	#escreva "PARA_BAIXO"
+ 	fim
+ 
+  	#escreva "Posição do Jogador X:{jogador.x} , Y:{jogador.y}"
+  fim
+  
+  coloque_sprite( s: Texto )
+  	sprite := Imagem(s)
+  fim
+   
+  desenhe_sprite()
+  	sprite.desenhe_centralizado(x, y,1)
+  fim
+   
+fim
+
+jogador = Jogador (200,200,10)
+jogador.coloque_sprite("src/imgs/player.png")
+
+
+atualize()
+  # Código para atualizar o jogo
+  #escreva "teste..."
+  jogador.atualize_movimento()
+
+fim
+
+desenhe()
+  # código para desenhar o jogo
+  
+  jogador.desenhe_sprite()
+  
+fim
+
+jogo.iniciar("Teste Jerimum", 640, 480, atualize, desenhe, 60)
