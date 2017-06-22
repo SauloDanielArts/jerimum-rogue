@@ -1,0 +1,174 @@
+use "jerimum"
+
+#classe que define o persoangem do jogador
+tipo Jogador
+  var x, y, vida: Inteiro
+  var sprites = Lista(0,Imagem(""))
+  var folha_de_sprite = Imagem("")
+  
+  var ms = Relógio.milisegundos
+  var sprite = Imagem("")
+  var ps = 1
+  
+  atualize_x(nx: Inteiro)
+  	x := nx
+  fim
+  
+  atualize_y(ny: Inteiro)
+  	y := ny
+  fim
+  
+  #coloque_sprite( s: Texto )
+  #sprite := Imagem(s)
+  #fim
+  
+  coloque_sprite( img: Imagem )
+  	sprite := img
+  fim
+   
+  coloque_sptrites( img: Imagem, largura:Inteiro, altura:Inteiro)
+   sprites := img.fatie(largura, altura)
+   #escreva sprite.tamanho
+   #sprite.tamanho
+  fim
+  
+  atualize_animatcão(f_in,f_out,frequancia:Inteiro)
+  
+  se  Relógio.milisegundos > (ms + frequancia) então
+  
+   ms := Relógio.milisegundos
+  # sprite := sprites[ps]
+  coloque_sprite(sprites[ps])
+   
+   ps := ps+1
+   se ps > sprites.tamanho então
+     ps := 1
+   fim
+  fim
+  
+ fim
+  
+  atualize_movimento()
+  	
+ 	se Teclado.TECLA_PARA_DIREITA então
+      	atualize_x(x + 1)
+      	#escreva "TECLA_PARA_DIREITA"
+ 	fim
+ 
+ 	se Teclado.TECLA_PARA_ESQUERDA então
+      	atualize_x(x - 1)
+      	#escreva "TECLA_PARA_ESQUERDA"
+ 	fim
+ 
+  	se Teclado.TECLA_PARA_CIMA então
+      	atualize_y(y - 1)
+      	#escreva "TECLA_PARA_CIMA"
+ 	fim
+ 
+ 	se Teclado.TECLA_PARA_BAIXO então
+      	atualize_y(y + 1)
+      	#escreva "PARA_BAIXO"
+ 	fim
+ 
+  	#escreva "Posição do Jogador X:{jogador.x} , Y:{jogador.y}"
+  fim
+  
+
+   
+   
+  desenhe_sprite(layer:Inteiro)
+  	sprite.desenhe_centralizado(x, y,layer)
+  fim
+  
+  tiro()
+     se Mouse.BOTAO_ESQUERDO então
+         escreva "Tiro!"
+  #       
+  #       #calcula a tiração do tiro, cria um projetil e o aremessa
+  #       #pos_x := Mouse.x
+  #       #pos_y := Mouse.y
+     fim
+  fim
+  
+   bomba()
+     se Mouse.BOTAO_DIREITO então
+         escreva "Bomba!"
+  #       
+  #       #calcula a tiração do tiro, cria um projetil e o aremessa
+  #       #pos_x := Mouse.x
+  #       #pos_y := Mouse.y
+     fim
+  fim
+   
+fim
+
+sprite_jogador = Imagem("src/imgs/player.png")
+
+#sonic_imagens = Imagem("src/imgs/sonic_hd.png").fatie(124, 117)
+#sprite_sonic = Imagem("src/imgs/sonic_hd.png")
+
+glitch_walker = Imagem("src/imgs/glitch_walker.png").fatie(104, 114)
+escreva glitch_walker.tamanho
+
+jogador = Jogador (200,200,10)
+jogador.coloque_sprite(sprite_jogador)
+
+jogador_walker = Jogador (400,400,10)
+jogador_walker.coloque_sprite(glitch_walker[1])
+gw = Imagem("src/imgs/glitch_walker.png")
+jogador_walker.coloque_sptrites(gw,104, 114)
+
+var f = Fonte(24)
+var cor = Cor(10, 120, 240)
+
+
+atualize()
+  # Código para atualizar o jogo
+  #escreva "teste..."
+ #jogador.atualize_movimento()
+ #jogador.tiro()
+ #jogador.bomba()
+
+jogador_walker.atualize_movimento()
+
+ # f.tamanho
+  #GUI=======================
+ f.desenhe("Pontos: 0", 20, 20, 2, cor)
+ # f.desenhe("Cor.AMARELO", 20, 40, 2, Cor.AMARELO)
+  
+ # f.desenhe("Hora{hora}", 20, 60, 2, Cor.VERDE)
+  #==========================
+
+fim
+
+var img = glitch_walker[1]
+var ps_1 = 1
+
+var hora = Relógio.agora
+var ms_1 = Relógio.milisegundos
+
+desenhe()
+# código para desenhar o jogo
+  
+# jogador.desenhe_sprite()
+  
+# se  Relógio.milisegundos > (ms_1 + 50) então  
+#   ms_1 := Relógio.milisegundos
+#   img := glitch_walker[ps_1] 
+#   ps_1 := ps_1+1
+#   se ps_1 > glitch_walker.tamanho então
+#     ps_1 := 1
+#   fim
+# fim
+# img.desenhe_centralizado(100, 100, 1)
+ 
+ 
+ jogador_walker.atualize_animatcão(1,16,50)
+ jogador_walker.desenhe_sprite(1)
+  
+# sonic_imagens[1].desenhe_centralizado(100, 100, 1)
+# img.desenhe_centralizado(200, 200, 1)
+  
+fim
+
+jogo.iniciar("Teste Jerimum", 640, 480, atualize, desenhe, 60)
