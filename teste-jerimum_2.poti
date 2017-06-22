@@ -1,14 +1,32 @@
 use "jerimum"
 
+tipo mapa
+  largura, altura: Inteiro
+fim
+
+tipo inimigo
+   var x, y, vida, x_dir, y_dir: Inteiro
+fim
+
 #classe que define o persoangem do jogador
 tipo Jogador
-  var x, y, vida: Inteiro
+  
+  var x, y: Inteiro
+  var vida = 1
+  var velocidade = 1
+  var x_dir = 1
+  var y_dir = 1 
+  var angulo = 0.0
   var sprites = Lista(0,Imagem(""))
   var folha_de_sprite = Imagem("")
   
   var ms = Relógio.milisegundos
   var sprite = Imagem("")
   var ps = 1
+  
+  configure_velocidade(vel: Inteiro)
+     velocidade := vel
+  fim
   
   atualize_x(nx: Inteiro)
   	x := nx
@@ -18,9 +36,9 @@ tipo Jogador
   	y := ny
   fim
   
-  #coloque_sprite( s: Texto )
-  #sprite := Imagem(s)
-  #fim
+  coloque_sprite( s: Texto )
+  sprite := Imagem(s)
+  fim
   
   coloque_sprite( img: Imagem )
   	sprite := img
@@ -51,69 +69,92 @@ tipo Jogador
   atualize_movimento()
   	
  	se Teclado.TECLA_PARA_DIREITA então
-      	atualize_x(x + 1)
+      	atualize_x(x + velocidade)
       	#escreva "TECLA_PARA_DIREITA"
+           x_dir := 1
  	fim
  
  	se Teclado.TECLA_PARA_ESQUERDA então
-      	atualize_x(x - 1)
+      	atualize_x(x - velocidade)
       	#escreva "TECLA_PARA_ESQUERDA"
+          x_dir := -1
  	fim
  
   	se Teclado.TECLA_PARA_CIMA então
-      	atualize_y(y - 1)
+      	atualize_y(y - velocidade)
       	#escreva "TECLA_PARA_CIMA"
+          y_dir := 1
  	fim
  
  	se Teclado.TECLA_PARA_BAIXO então
-      	atualize_y(y + 1)
+      	atualize_y(y + velocidade)
       	#escreva "PARA_BAIXO"
+          y_dir := -1
  	fim
  
   	#escreva "Posição do Jogador X:{jogador.x} , Y:{jogador.y}"
   fim
   
 
-   
+  #rotacione(angulo:Real)
+  #  
+  #fim
    
   desenhe_sprite(layer:Inteiro)
   	sprite.desenhe_centralizado(x, y,layer)
   fim
   
+  desenhe_sprite(scala_X,scala_Y:Inteiro,layer:Inteiro)
+  	sprite.desenhe_centralizado(scala_X,scala_Y,layer)
+  fim
+  
+  desenhe_sprite_oriatada_xy(layer:Inteiro)
+  	sprite.desenhe_centralizado(x,y,layer,0.0,x_dir, y_dir)
+     #desenhe_centralizado(x, y: Real, z: Inteiro, angulo: Real = 0.0,  scala_X,scala_Y: Real = 1.0)
+  fim
+  
+  desenhe_sprite_oriatada_x(layer:Inteiro)
+  	sprite.desenhe_centralizado(x,y,layer,0.0,x_dir, 1)
+  fim
+  
+  desenhe_sprite_oriatada_y(layer:Inteiro)
+  	sprite.desenhe_centralizado(x,y,layer,0.0,1, y_dir)
+  fim
+  
   tiro()
      se Mouse.BOTAO_ESQUERDO então
-         escreva "Tiro!"
-  #       
-  #       #calcula a tiração do tiro, cria um projetil e o aremessa
-  #       #pos_x := Mouse.x
-  #       #pos_y := Mouse.y
+
+         #calcula a tiração do tiro, cria um projetil e o aremessa
+         var pos_x = Mouse.x
+         var pos_y = Mouse.y
+         
+         escreva "Tiro! ({pos_x},{pos_y})"
      fim
   fim
   
    bomba()
      se Mouse.BOTAO_DIREITO então
-         escreva "Bomba!"
-  #       
-  #       #calcula a tiração do tiro, cria um projetil e o aremessa
-  #       #pos_x := Mouse.x
-  #       #pos_y := Mouse.y
+         
+         #calcula a tiração do tiro, cria um projetil e o aremessa
+         var pos_x = Mouse.x
+         var pos_y = Mouse.y
+         
+         escreva "Bomba! ({pos_x},{pos_y})"
      fim
   fim
    
 fim
 
 sprite_jogador = Imagem("src/imgs/player.png")
+jogador = Jogador (200,200)
+jogador.coloque_sprite("src/imgs/player.png")
+jogador.coloque_sprite(sprite_jogador)
 
-#sonic_imagens = Imagem("src/imgs/sonic_hd.png").fatie(124, 117)
-#sprite_sonic = Imagem("src/imgs/sonic_hd.png")
 
 glitch_walker = Imagem("src/imgs/glitch_walker.png").fatie(104, 114)
 escreva glitch_walker.tamanho
 
-jogador = Jogador (200,200,10)
-jogador.coloque_sprite(sprite_jogador)
-
-jogador_walker = Jogador (400,400,10)
+jogador_walker = Jogador (400,400)
 jogador_walker.coloque_sprite(glitch_walker[1])
 gw = Imagem("src/imgs/glitch_walker.png")
 jogador_walker.coloque_sptrites(gw,104, 114)
@@ -125,46 +166,32 @@ var cor = Cor(10, 120, 240)
 atualize()
   # Código para atualizar o jogo
   #escreva "teste..."
- #jogador.atualize_movimento()
+ jogador.atualize_movimento()
  #jogador.tiro()
  #jogador.bomba()
 
 jogador_walker.atualize_movimento()
+jogador_walker.tiro()
+jogador_walker.bomba()
 
  # f.tamanho
   #GUI=======================
  f.desenhe("Pontos: 0", 20, 20, 2, cor)
  # f.desenhe("Cor.AMARELO", 20, 40, 2, Cor.AMARELO)
-  
  # f.desenhe("Hora{hora}", 20, 60, 2, Cor.VERDE)
   #==========================
 
 fim
 
-var img = glitch_walker[1]
-var ps_1 = 1
-
-var hora = Relógio.agora
-var ms_1 = Relógio.milisegundos
-
 desenhe()
 # código para desenhar o jogo
   
-# jogador.desenhe_sprite()
+ #jogador.desenhe_sprite(1)
   
-# se  Relógio.milisegundos > (ms_1 + 50) então  
-#   ms_1 := Relógio.milisegundos
-#   img := glitch_walker[ps_1] 
-#   ps_1 := ps_1+1
-#   se ps_1 > glitch_walker.tamanho então
-#     ps_1 := 1
-#   fim
-# fim
-# img.desenhe_centralizado(100, 100, 1)
- 
- 
  jogador_walker.atualize_animatcão(1,16,50)
- jogador_walker.desenhe_sprite(1)
+ #jogador_walker.desenhe_sprite(1)
+ #jogador_walker.desenhe_sprite_oriatada_xy(1)
+ jogador_walker.desenhe_sprite_oriatada_x(1)
   
 # sonic_imagens[1].desenhe_centralizado(100, 100, 1)
 # img.desenhe_centralizado(200, 200, 1)
