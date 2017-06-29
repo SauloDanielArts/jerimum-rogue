@@ -1,3 +1,4 @@
+
 use "jerimum"
 
 tipo mapa
@@ -13,7 +14,7 @@ tipo Jogador
   
   var x, y: Inteiro
   var vida = 1
-  var velocidade = 1
+  var velocidade = 3
   var x_dir = 1
   var y_dir = 1 
   var angulo = 0.0
@@ -68,25 +69,25 @@ tipo Jogador
   
   atualize_movimento()
   	
- 	se Teclado.TECLA_PARA_DIREITA então
+ 	se Teclado.TECLA_D então
       	atualize_x(x + velocidade)
       	#escreva "TECLA_PARA_DIREITA"
            x_dir := 1
  	fim
  
- 	se Teclado.TECLA_PARA_ESQUERDA então
+ 	se Teclado.TECLA_A então
       	atualize_x(x - velocidade)
       	#escreva "TECLA_PARA_ESQUERDA"
           x_dir := -1
  	fim
  
-  	se Teclado.TECLA_PARA_CIMA então
+  	se Teclado.TECLA_W então
       	atualize_y(y - velocidade)
       	#escreva "TECLA_PARA_CIMA"
           y_dir := 1
  	fim
  
- 	se Teclado.TECLA_PARA_BAIXO então
+ 	se Teclado.TECLA_S então
       	atualize_y(y + velocidade)
       	#escreva "PARA_BAIXO"
           y_dir := -1
@@ -145,6 +146,19 @@ tipo Jogador
    
 fim
 
+tipo desenhe_texto
+ #var t: Texto 
+ #var f_x, f_y, f_t: Inteiro
+ 
+ #var cor_w = Cor(255, 255, 255)
+ #var cor_b = Cor(0, 0, 0)
+ #var f =  Fonte(f_t)
+  
+ #f.desenhe(t, f_x, f_y, 2, cor_w)
+ #f.desenhe(t, f_x+2, f_x, 2, cor_b)
+fim
+
+
 sprite_jogador = Imagem("src/imgs/player.png")
 jogador = Jogador (200,200)
 jogador.coloque_sprite("src/imgs/player.png")
@@ -159,8 +173,6 @@ jogador_walker.coloque_sprite(glitch_walker[1])
 gw = Imagem("src/imgs/glitch_walker.png")
 jogador_walker.coloque_sptrites(gw,104, 114)
 
-var f = Fonte(24)
-var cor = Cor(10, 120, 240)
 
 
 atualize()
@@ -176,7 +188,10 @@ jogador_walker.bomba()
 
  # f.tamanho
   #GUI=======================
- f.desenhe("Pontos: 0", 20, 20, 2, cor)
+ #f_x = 20
+ #f_y = 20
+ #f.desenhe("Pontos: 0", f_x, f_y, 2, cor_w)
+ #f.desenhe("Pontos: 0", f_x+2, f_x, 2, cor_b)
  # f.desenhe("Cor.AMARELO", 20, 40, 2, Cor.AMARELO)
  # f.desenhe("Hora{hora}", 20, 60, 2, Cor.VERDE)
   #==========================
