@@ -1,0 +1,284 @@
+
+use "jerimum"
+
+tipo mapa
+  largura, altura: Inteiro
+fim
+
+#classe que define o inimigo
+tipo Inimigo
+   var x_IA, y_IA, velocidade_IA: Inteiro
+   var vida_IA = 2
+   #var velocidade_IA = 2
+   var x_dir_IA = 1
+   var y_dir_IA = 1
+   var dano_IA = 1
+   var sprites_IA = Lista(0, Imagem(""))
+
+    desenhe_IA()
+      sprites_IA[1].desenhe_centralizado(x_IA, y_IA, 1)
+    fim
+
+    seguirJogador(x_Jogador, y_Jogador: Inteiro)
+
+      se x_IA > x_Jogador então
+        x_IA := x_IA - velocidade_IA
+      senãose x_IA < x_Jogador então
+        x_IA := x_IA + velocidade_IA
+      fim
+
+      se y_IA > y_Jogador então
+        y_IA := y_IA - velocidade_IA
+      senãose y_IA < y_Jogador então
+        y_IA := y_IA + velocidade_IA
+      fim
+
+    fim
+
+   danoIA(x_Jogador, y_Jogador:Inteiro)## Dano do IA #########################
+     enquanto x_IA <= (x_Jogador +10) e x_IA >= (x_Jogador -10) faca 
+
+       #x_IA == x_Jogador e y_IA == y_Jogador
+       var pos_x = x_IA
+       var pos_y = y_IA
+       escreva "DANO!! ({pos_x},{pos_y})"
+     fim
+  fim
+
+  fim
+fim
+
+#classe que define o persoangem do jogador
+tipo Jogador
+
+  var x, y: Inteiro
+  var vida = 3
+  var velocidade = 6
+  var x_dir = 1
+  var y_dir = 1
+  var angulo = 0.0
+  var sprites = Lista(0,Imagem(""))
+  var folha_de_sprite = Imagem("")
+
+  var ms = Relógio.milisegundos
+  var sprite = Imagem("")
+  var ps = 1
+
+  configure_velocidade(vel: Inteiro)
+     velocidade := vel
+  fim
+
+  atualize_x(nx: Inteiro)
+  	x := nx
+  fim
+
+  atualize_y(ny: Inteiro)
+  	y := ny
+  fim
+
+  coloque_sprite( s: Texto )
+  sprite := Imagem(s)
+  fim
+
+  coloque_sprite( img: Imagem )
+  	sprite := img
+  fim
+
+  coloque_sptrites( img: Imagem, largura:Inteiro, altura:Inteiro)
+   sprites := img.fatie(largura, altura)
+   #escreva sprite.tamanho
+   #sprite.tamanho
+  fim
+
+  atualize_animatcão(f_in,f_out,frequancia:Inteiro)
+
+  se  Relógio.milisegundos > (ms + frequancia) então
+
+   ms := Relógio.milisegundos
+  # sprite := sprites[ps]
+  coloque_sprite(sprites[ps])
+
+   ps := ps+1
+   se ps > sprites.tamanho então
+     ps := 1
+   fim
+  fim
+
+ fim
+
+  atualize_movimento()
+
+ 	se Teclado.TECLA_D então
+      	atualize_x(x + velocidade)
+      	#escreva "TECLA_PARA_DIREITA"
+           x_dir := 1
+ 	fim
+
+ 	se Teclado.TECLA_A então
+      	atualize_x(x - velocidade)
+      	#escreva "TECLA_PARA_ESQUERDA"
+          x_dir := -1
+ 	fim
+
+  	se Teclado.TECLA_W então
+      	atualize_y(y - velocidade)
+      	#escreva "TECLA_PARA_CIMA"
+          y_dir := 1
+ 	fim
+
+ 	se Teclado.TECLA_S então
+      	atualize_y(y + velocidade)
+      	#escreva "PARA_BAIXO"
+          y_dir := -1
+ 	fim
+
+  	#escreva "Posição do Jogador X:{jogador.x} , Y:{jogador.y}"
+  fim
+
+
+  #rotacione(angulo:Real)
+  #fim
+
+  desenhe_sprite(layer:Inteiro)
+  	sprite.desenhe_centralizado(x, y,layer)
+  fim
+
+  desenhe_sprite(scala_X,scala_Y:Inteiro,layer:Inteiro)
+  	sprite.desenhe_centralizado(scala_X,scala_Y,layer)
+  fim
+
+  desenhe_sprite_oriatada_xy(layer:Inteiro)
+  	sprite.desenhe_centralizado(x,y,layer,0.0,x_dir, y_dir)
+     #desenhe_centralizado(x, y: Real, z: Inteiro, angulo: Real = 0.0,  scala_X,scala_Y: Real = 1.0)
+  fim
+
+  desenhe_sprite_oriatada_x(layer:Inteiro)
+  	sprite.desenhe_centralizado(x,y,layer,0.0,x_dir, 1)
+  fim
+
+  desenhe_sprite_oriatada_y(layer:Inteiro)
+  	sprite.desenhe_centralizado(x,y,layer,0.0,1, y_dir)
+  fim
+
+  tiro()
+     se Mouse.BOTAO_ESQUERDO então
+
+         #calcula a tiração do tiro, cria um projetil e o aremessa
+         var pos_x = Mouse.x
+         var pos_y = Mouse.y
+
+         escreva "Tiro! ({pos_x},{pos_y})"
+     fim
+  fim
+
+   bomba()
+     se Mouse.BOTAO_DIREITO então
+
+         #calcula a tiração do tiro, cria um projetil e o aremessa
+         var pos_x = Mouse.x
+         var pos_y = Mouse.y
+
+         escreva "Bomba! ({pos_x},{pos_y})"
+     fim
+  fim
+fim
+
+tipo desenhe_texto
+ #var t: Texto
+ #var f_x, f_y, f_t: Inteiro
+
+ #var cor_w = Cor(255, 255, 255)
+ #var cor_b = Cor(0, 0, 0)
+ #var f =  Fonte(f_t)
+
+ #f.desenhe(t, f_x, f_y, 2, cor_w)
+ #f.desenhe(t, f_x+2, f_x, 2, cor_b)
+fim
+
+sprite_jogador = Imagem("src/imgs/player.png")
+jogador = Jogador (200,200)
+jogador.coloque_sprite("src/imgs/player.png")
+jogador.coloque_sprite(sprite_jogador)
+
+
+glitch_walker = Imagem("src/imgs/glitch_walker.png").fatie(104, 114)
+escreva glitch_walker.tamanho
+
+jogador_walker = Jogador (400,400)
+jogador_walker.coloque_sprite(glitch_walker[1])
+gw = Imagem("src/imgs/glitch_walker.png")
+jogador_walker.coloque_sptrites(gw,104, 114)
+
+
+ var ini_1 = Inimigo(30,30, 1)
+ ini_1.sprites_IA  := Imagem("src/imgs/bixo.png").fatie(16, 16)
+
+ var ini_2 = Inimigo(300,30, 2)
+ ini_2.sprites_IA  := Imagem("src/imgs/bixo.png").fatie(16, 16)
+
+ var ini_3 = Inimigo(60,30, 2)
+ ini_3.sprites_IA  := Imagem("src/imgs/bixo.png").fatie(16, 16)
+
+ var ini_4 = Inimigo(10,30, 2)
+ ini_4.sprites_IA  := Imagem("src/imgs/bixo.png").fatie(16, 16)
+
+ var ini_5 = Inimigo(80,30,1)
+ ini_5.sprites_IA  := Imagem("src/imgs/joaninha.png").fatie(16, 16)
+
+
+atualize() ##LOGICA#######################
+
+  ini_1.danoIA(jogador_walker.x,jogador_walker.y)
+  ini_1.seguirJogador(jogador_walker.x,jogador_walker.y)
+  ini_2.seguirJogador(jogador_walker.x,jogador_walker.y)
+  ini_3.seguirJogador(jogador_walker.x,jogador_walker.y)
+  ini_4.seguirJogador(jogador_walker.x,jogador_walker.y)
+  ini_5.seguirJogador(jogador_walker.x,jogador_walker.y)
+
+
+# Código para atualizar o jogo
+#escreva "teste..."
+ jogador.atualize_movimento()
+#jogador.tiro()
+#jogador.bomba()
+
+jogador_walker.atualize_movimento()
+jogador_walker.tiro()
+jogador_walker.bomba()
+
+
+ # f.tamanho
+  #GUI=======================
+ #f_x = 20
+ #f_y = 20
+ #f.desenhe("Pontos: 0", f_x, f_y, 2, cor_w)
+ #f.desenhe("Pontos: 0", f_x+2, f_x, 2, cor_b)
+ # f.desenhe("Cor.AMARELO", 20, 40, 2, Cor.AMARELO)
+ # f.desenhe("Hora{hora}", 20, 60, 2, Cor.VERDE)
+  #==========================
+
+fim
+
+
+desenhe()
+# código para desenhar o jogo
+
+ #jogador.desenhe_sprite(1)
+
+ jogador_walker.atualize_animatcão(1,16,50)
+ #jogador_walker.desenhe_sprite(1)
+ #jogador_walker.desenhe_sprite_oriatada_xy(1)
+ jogador_walker.desenhe_sprite_oriatada_x(1)
+
+ini_1.desenhe_IA()
+ini_2.desenhe_IA()
+ini_3.desenhe_IA()
+ini_4.desenhe_IA()
+ini_5.desenhe_IA()
+
+# sonic_imagens[1].desenhe_centralizado(100, 100, 1)
+# img.desenhe_centralizado(200, 200, 1)
+
+fim
+
+jogo.iniciar("Rogue Like Conversion", 640, 480, atualize, desenhe, 60)
