@@ -110,7 +110,7 @@ tipo Jogador
       	atualize_x(x + velocidade)
     fim
       	#escreva "TECLA_PARA_DIREITA"
-         x_dir := 1
+         #x_dir := 1
          movimento := verdadeiro
  	fim
 
@@ -119,7 +119,7 @@ tipo Jogador
       	atualize_x(x - velocidade)
       fim
       	#escreva "TECLA_PARA_ESQUERDA"
-        x_dir := -1
+        #x_dir := -1
         movimento := verdadeiro
  	fim
 
@@ -130,7 +130,7 @@ tipo Jogador
      fim
 
       	#escreva "TECLA_PARA_CIMA"
-        y_dir := 1
+        #y_dir := 1
         movimento := verdadeiro
  	fim
 
@@ -139,7 +139,7 @@ tipo Jogador
       	atualize_y(y + velocidade)
       fim
       	#escreva "PARA_BAIXO"
-        y_dir := -1
+        #y_dir := -1
         movimento := verdadeiro
  	fim
 
@@ -187,12 +187,12 @@ tipo Jogador
     escreva angulo
 
     se pos_x < x entao
-      arma.desenhe_centralizado(x,y+8,layer,angulo,-1, 1)
+      x_dir := -1
+    senão
+      x_dir := 1
     fim
 
-    se pos_x > x entao
-      arma.desenhe_centralizado(x,y+8,layer,angulo,1, 1)
-    fim
+    arma.desenhe_centralizado(x,y+8,layer,angulo,x_dir, 1)
 
   fim
 
