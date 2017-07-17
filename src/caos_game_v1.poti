@@ -1,0 +1,73 @@
+use "jerimum"
+use "inimigo.poti"
+use "jogador.poti"
+
+tipo mapa
+  largura, altura: Inteiro
+fim
+
+arma = Imagem("imgs/arma.png")
+mira = Imagem("imgs/mira.png")
+bala = Imagem("imgs/bala.png").fatie(32, 32)
+
+jogador = Jogador (320,240)
+jogador_sprites = Imagem("imgs/player.png").fatie(64, 64)
+jogador.coloque_sprite(jogador_sprites[1])
+jogador.coloque_sptrites(Imagem("imgs/player.png"),64, 64)
+jogador.coloque_sprite_arma(arma)
+jogador.coloque_sprite_mira(mira)
+
+
+ var ini_1 = Inimigo(30,30, 1)
+ ini_1.sprites_IA  := Imagem("imgs/bixo.png").fatie(16, 16)
+
+ var ini_2 = Inimigo(300,30, 2)
+ ini_2.sprites_IA  := Imagem("imgs/joaninha.png").fatie(16, 16)
+
+ var ini_3 = Inimigo(60,30, 2)
+ ini_3.sprites_IA  := Imagem("imgs/bixo.png").fatie(16, 16)
+
+ var ini_4 = Inimigo(10,30, 2)
+ ini_4.sprites_IA  := Imagem("imgs/bixo.png").fatie(16, 16)
+
+ var ini_5 = Inimigo(80,30,1)
+ ini_5.sprites_IA  := Imagem("imgs/joaninha.png").fatie(16, 16)
+
+
+atualize() ##LOGICA#######################
+
+  ini_1.danoIA(jogador.x,jogador.y)
+  ini_1.colisao_IA(ini_2.x_IA, ini_2.y_IA)
+  ini_1.colisao_IA(jogador.x, jogador.y)
+  ini_1.seguirJogador(jogador.x,jogador.y)
+
+
+  ini_2.seguirJogador(jogador.x,jogador.y)
+  ini_2.colisao_IA(jogador.x, jogador.y)
+
+  ini_3.seguirJogador(jogador.x,jogador.y)
+
+  ini_4.seguirJogador(jogador.x,jogador.y)
+  ini_5.seguirJogador(jogador.x,jogador.y)
+
+
+# Código para atualizar o jogo
+jogador.atualize_movimento()
+jogador.tiro()
+jogador.bomba()
+
+fim
+
+
+desenhe() # código para desenhar o jogo
+jogador.desenhe()
+
+ini_1.desenhe_IA()
+ini_2.desenhe_IA()
+ini_3.desenhe_IA()
+ini_4.desenhe_IA()
+ini_5.desenhe_IA()
+
+fim
+
+jogo.iniciar("CaosGame - Rogue Like 2D", 1024, 760, atualize, desenhe, 30)

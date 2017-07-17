@@ -1,0 +1,207 @@
+tipo Jogador
+
+  var x, y: Inteiro
+  var vida = 1
+  var velocidade = 5
+  var movimento = falso
+  var x_dir = 1
+  var y_dir = 1
+  var angulo = 0.0
+  var sprites = Lista(0,Imagem(""))
+  var folha_de_sprite = Imagem("")
+  var mira = Imagem("")
+  var arma = Imagem("")
+
+  var ms = Relógio.milisegundos
+  var sprite = Imagem("")
+  var ps = 1
+
+  configure_velocidade(vel: Inteiro)
+     velocidade := vel
+  fim
+
+  atualize_x(nx: Inteiro)
+  	x := nx
+  fim
+
+  atualize_y(ny: Inteiro)
+  	y := ny
+  fim
+
+  coloque_sprite( s: Texto )
+  sprite := Imagem(s)
+  fim
+
+  coloque_sprite( img: Imagem )
+  	sprite := img
+  fim
+
+  coloque_sprite_mira( img: Imagem )
+    mira := img
+  fim
+
+  coloque_sprite_arma( img: Imagem )
+    arma := img
+  fim
+
+  coloque_sptrites( img: Imagem, largura:Inteiro, altura:Inteiro)
+   sprites := img.fatie(largura, altura)
+   #escreva sprite.tamanho
+   #sprite.tamanho
+  fim
+
+  atualize_animatcão(f_in,f_out,frequencia:Inteiro)
+
+  se  Relógio.milisegundos > (ms + frequencia) então
+
+   ms := Relógio.milisegundos
+  # sprite := sprites[ps]
+  coloque_sprite(sprites[ps])
+
+   ps := ps+1
+   se ps > f_out então
+     ps := f_in
+   fim
+  fim
+
+ fim
+
+ desenhe()
+
+  #escreva movimento
+
+  desenhe_sprite_mira(3)
+  desenhe_sprite_arma(2)
+
+   se movimento == verdadeiro então
+        atualize_animatcão(1,2,80)# caminhando
+        #jogador_walker.desenhe_sprite(1)
+        #jogador_walker.desenhe_sprite_oriatada_xy(1)
+        desenhe_sprite_oriatada_x(1)
+   senão
+       atualize_animatcão(3,4,80)# parado
+       desenhe_sprite_oriatada_x(1)
+   fim
+
+ fim
+
+  atualize_movimento()
+
+
+  se nao Teclado.TECLA_D e nao Teclado.TECLA_A e nao Teclado.TECLA_A e nao Teclado.TECLA_S então
+   movimento := falso
+  fim
+
+ 	se Teclado.TECLA_D então
+
+    se x + 16 <= 1024 então
+      	atualize_x(x + velocidade)
+    fim
+      	#escreva "TECLA_PARA_DIREITA"
+         #x_dir := 1
+         movimento := verdadeiro
+ 	fim
+
+ 	se Teclado.TECLA_A então
+      se x - 16 >= 0 então
+      	atualize_x(x - velocidade)
+      fim
+      	#escreva "TECLA_PARA_ESQUERDA"
+        #x_dir := -1
+        movimento := verdadeiro
+ 	fim
+
+  	se Teclado.TECLA_W então
+
+     se y + 30 >= 0 então
+      	atualize_y(y - velocidade)
+     fim
+
+      	#escreva "TECLA_PARA_CIMA"
+        #y_dir := 1
+        movimento := verdadeiro
+ 	fim
+
+ 	se Teclado.TECLA_S então
+    se y + 30 <= 780 então
+      	atualize_y(y + velocidade)
+      fim
+      	#escreva "PARA_BAIXO"
+        #y_dir := -1
+        movimento := verdadeiro
+ 	fim
+
+
+
+
+  	#escreva "Posição do Jogador X:{jogador.x} , Y:{jogador.y}"
+  fim
+
+
+  #rotacione(angulo:Real)
+  #
+  #fim
+
+  desenhe_sprite(layer:Inteiro)
+  	sprite.desenhe_centralizado(x, y,layer)
+  fim
+
+  desenhe_sprite(scala_X,scala_Y:Inteiro,layer:Inteiro)
+  	sprite.desenhe_centralizado(scala_X,scala_Y,layer)
+  fim
+
+  desenhe_sprite_oriatada_xy(layer:Inteiro)
+  	sprite.desenhe_centralizado(x,y,layer,0.0,x_dir, y_dir)
+     #desenhe_centralizado(x, y: Real, z: Inteiro, angulo: Real = 0.0,  scala_X,scala_Y: Real = 1.0)
+  fim
+
+  desenhe_sprite_oriatada_x(layer:Inteiro)
+  	sprite.desenhe_centralizado(x,y,layer,0.0,x_dir, 1)
+  fim
+
+  desenhe_sprite_oriatada_y(layer:Inteiro)
+  	sprite.desenhe_centralizado(x,y,layer,0.0,1, y_dir)
+  fim
+
+  desenhe_sprite_mira(layer:Inteiro)
+   mira.desenhe_centralizado(Mouse.x,Mouse.y,layer,0.0,x_dir, 1)
+  fim
+
+  desenhe_sprite_arma(layer:Inteiro)
+    var pos_x = Mouse.x
+    var pos_y = Mouse.y
+
+    angulo = x_dir*arctg( (- pos_y  + y) / (+ pos_x - x)  )*(180/PI)
+    escreva angulo
+
+    se pos_x < x entao
+      x_dir := -1
+    senão
+      x_dir := 1
+    fim
+
+    arma.desenhe_centralizado(x,y+8,layer,angulo,x_dir, 1)
+
+  fim
+
+  tiro()
+     se Mouse.BOTAO_ESQUERDO então
+
+         #calcula a tiração do tiro, cria um projetil e o aremessa
+         var pos_x = Mouse.x
+         var pos_y = Mouse.y
+
+         escreva "Tiro! ({pos_x},{pos_y})"
+     fim
+  fim
+
+   bomba()
+     se Mouse.BOTAO_DIREITO então
+
+         #calcula a tiração do tiro, cria um projetil e o aremessa
+         var pos_x = Mouse.x
+         var pos_y = Mouse.y
+
+         escreva "Bomba! ({pos_x},{pos_y})"
+     fim
+  fim

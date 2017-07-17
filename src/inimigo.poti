@@ -1,0 +1,77 @@
+tipo Inimigo
+   var x_IA, y_IA, velocidade_IA: Inteiro
+   var vida_IA = 2
+   #var velocidade_IA = 2
+   var x_dir_IA = 1
+   var y_dir_IA = 1
+   var dano_IA = 1
+   var sprites_IA = Lista(0, Imagem(""))
+
+   var andar = falso
+
+    var ms_IA = Relógio.milisegundos
+
+    desenhe_IA()
+      sprites_IA[1].desenhe_centralizado(x_IA, y_IA, 1,0,4,4)
+    fim
+
+    seguirJogador(x_Jogador, y_Jogador: Inteiro)
+    se andar == verdadeiro entao
+      se x_IA > x_Jogador então
+        x_IA := x_IA - velocidade_IA
+      senãose x_IA < x_Jogador então
+        x_IA := x_IA + velocidade_IA
+      fim
+
+      se y_IA > y_Jogador então
+        y_IA := y_IA - velocidade_IA
+      senãose y_IA < y_Jogador então
+        y_IA := y_IA + velocidade_IA
+      fim
+    fim
+    fim
+
+   danoIA(x_Jogador, y_Jogador:Inteiro)## Dano do IA #########################
+
+
+    se x_IA <= (x_Jogador +50) e x_IA >= (x_Jogador -50) e y_IA <= (y_Jogador +50) e y_IA >= (y_Jogador -50) e Relogio.milisegundos  > ms_IA + 200 entao
+
+       #x_IA == x_Jogador e y_IA == y_Jogador
+       var pos_x = x_IA
+       var pos_y = y_IA
+
+       escreva "DANO!! ({pos_x},{pos_y})"
+
+       ms_IA := Relogio.milisegundos
+
+     fim
+  fim
+
+  colisao_IA(x_colisao, y_colisao:Inteiro)## COLISÃO IA ########################
+    se x_IA <= (x_colisao +50) e x_IA >= (x_colisao -50) e y_IA <= (y_colisao +50) e y_IA >= (y_colisao -50) entao
+      andar := falso
+      var pos_x = x_IA
+      var pos_y = y_IA
+
+
+      se x_colisao > x_IA entao
+      x_IA := x_IA - 10
+      fim
+
+      se x_colisao < x_IA entao
+      x_IA := x_IA + 10
+      fim
+
+     se y_colisao > y_IA entao
+      y_IA := y_IA - 10
+     fim
+
+     se y_colisao < y_IA entao
+      y_IA := y_IA + 10
+     fim
+
+      escreva "Separar ({pos_x}, {pos_y})"
+    senão
+      andar := verdadeiro
+    fim
+fim
