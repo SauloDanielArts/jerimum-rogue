@@ -1,4 +1,4 @@
-# Jerimum-Rogue
+# Jerimum-Rogue (Caos Game)
 
 Um game feito utilizando a linguagem de programação simples e didatica chamada Potigol, disponível em: 
 
