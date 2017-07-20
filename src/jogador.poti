@@ -1,7 +1,7 @@
 tipo Jogador
 
   var x, y: Inteiro
-  var vida = 1
+  var vida = 3
   var velocidade = 5
   var movimento = falso
   var x_dir = 1
@@ -168,11 +168,20 @@ tipo Jogador
   fim
 
   desenhe_sprite_arma(layer:Inteiro)
-    var pos_x = Mouse.x
-    var pos_y = Mouse.y
+    var pos_x := Mouse.x
+    var pos_y := Mouse.y
 
-    angulo = x_dir*arctg( (- pos_y  + y) / (+ pos_x - x)  )*(180/PI)
-    escreva angulo
+   angulo := 0
+
+    se pos_x < x então
+      angulo := x_dir*arctg( (- pos_y  + y) / (+ pos_x - x)  )*(180/PI)
+      #escreva angulo
+    fim
+
+    se pos_x > x então
+      angulo := -x_dir*arctg( (- pos_y  + y) / (+ pos_x - x)  )*(180/PI)
+      #escreva angulo
+    fim
 
     se pos_x < x entao
       x_dir := -1
