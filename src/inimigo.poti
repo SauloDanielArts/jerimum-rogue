@@ -41,6 +41,7 @@ tipo Inimigo
        var pos_y = y_IA
 
        escreva "DANO!! ({pos_x},{pos_y})"
+       vidas := vidas - 1
 
        ms_IA := Relogio.milisegundos
 
