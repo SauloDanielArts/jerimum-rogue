@@ -5,4 +5,4 @@ Um game feito utilizando a linguagem de programação simples e didatica chamada
 * http://potigol.github.io
 * https://potigol.github.io/Jerimum
 
-Site do projeto: https://saulodfp.github.io/jerimum-rogue/index.html
+Site do projeto: https://saulodfp.github.io/jerimum-rogue/index.md
