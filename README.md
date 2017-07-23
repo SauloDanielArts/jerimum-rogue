@@ -5,8 +5,6 @@ Jerimum-Rogue e um game feito utilizando a linguagem de programação simples e 
 * http://potigol.github.io
 * https://potigol.github.io/Jerimum
 
-Site do projeto: https://saulodfp.github.io/jerimum-rogue/index.html
-
 # Descrição:
 
 Jerimum-Rogue e um jogo inspirado no estilço roguelike onde seu pernoangem tem que sobrevirar a a atague de uma ordade inimigos aleatorios. Inicialmente esta senso desenvolvido para um trabalgo da disciplica de programação de computadores da tuma IFRN.2017.1.M orientado pelo professor Leonardo Lucena.
@@ -17,3 +15,6 @@ Jerimum-Rogue e um jogo inspirado no estilço roguelike onde seu pernoangem tem 
 * Utilize o mouse para mirar nos inimigos e precione a tecla direira para atirar;
 * Tente sobrevivar o maximo o possivel a os contanstes ataques dos inimigos.
 
+# Site do projeto: 
+
+* https://saulodfp.github.io/jerimum-rogue/index.html
