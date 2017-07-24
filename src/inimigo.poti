@@ -1,5 +1,8 @@
 tipo Inimigo
    var x_IA, y_IA, velocidade_IA: Inteiro
+   var jogador_IA : Jogador
+
+   var ativo_IA = falso
    var vida_IA = 2
    #var velocidade_IA = 2
    var x_dir_IA = 1
@@ -15,33 +18,34 @@ tipo Inimigo
       sprites_IA[1].desenhe_centralizado(x_IA, y_IA, 1,0,4,4)
     fim
 
-    seguirJogador(x_Jogador, y_Jogador: Inteiro)
+    seguir(x_alvo, y_alvo: Inteiro)
     se andar == verdadeiro entao
-      se x_IA > x_Jogador então
+      se x_IA > x_alvo então
         x_IA := x_IA - velocidade_IA
-      senãose x_IA < x_Jogador então
+      senãose x_IA < x_alvo então
         x_IA := x_IA + velocidade_IA
       fim
 
-      se y_IA > y_Jogador então
+      se y_IA > y_alvo então
         y_IA := y_IA - velocidade_IA
-      senãose y_IA < y_Jogador então
+      senãose y_IA < y_alvo então
         y_IA := y_IA + velocidade_IA
       fim
     fim
     fim
 
-   danoIA(x_Jogador, y_Jogador:Inteiro)## Dano do IA #########################
+   danoIA(j:Jogador)## Dano do IA #########################
+   #x_Jogador, y_Jogador:Inteiro
 
-
-    se x_IA <= (x_Jogador +50) e x_IA >= (x_Jogador -50) e y_IA <= (y_Jogador +50) e y_IA >= (y_Jogador -50) e Relogio.milisegundos  > ms_IA + 200 entao
+    se x_IA <= (j.x +50) e x_IA >= (j.x -50) e y_IA <= (j.y +50) e y_IA >= (j.y -50) e Relogio.milisegundos  > ms_IA + 400 entao
 
        #x_IA == x_Jogador e y_IA == y_Jogador
        var pos_x = x_IA
        var pos_y = y_IA
 
        escreva "DANO!! ({pos_x},{pos_y})"
-       vidas := vidas - 1
+       j.vidas := j.vidas - 1
+       escreva "Vida: {j.vidas}"
 
        ms_IA := Relogio.milisegundos
 
@@ -71,8 +75,20 @@ tipo Inimigo
       y_IA := y_IA + 10
      fim
 
-      escreva "Separar ({pos_x}, {pos_y})"
+      #escreva "Separar ({pos_x}, {pos_y})"
     senão
       andar := verdadeiro
     fim
+  fim
+
+  atualize()
+    se ativo_IA == verdadeiro
+      #=====
+      seguir(jogador_IA.x,jogador_IA.y)
+      desenhe_IA()
+      danoIA(jogador_IA)
+
+    fim
+  fim
+
 fim

@@ -1,0 +1,51 @@
+tipo Bala
+  var x_bala, y_bala, velocidade_x, velocidade_y, raio_bala: Inteiro
+  var sprites_bala = Lista(0, Imagem(""))
+  #var inimigos_bala = Lista(10,Inimigo).mutável
+
+
+  var angulo_bala = 0
+  var ativo_bala = falso
+
+  var ms_bala = Relógio.milisegundos
+
+  coloque_sptrites( img_bala: Imagem, largura:Inteiro, altura:Inteiro)
+   sprites_bala := img_bala.fatie(largura, altura)
+   #escreva sprite.tamanho
+  fim
+
+  coloque_posição(p_x,p_y:Inteiro)
+    x_bala := p_x
+    y_bala := p_y
+  fim
+
+  coleque_angulo(a_bala:Inteiro)
+    angulo_bala := a_bala
+  fim
+
+  atualize()
+    se ativo_bala == verdadeiro entao
+
+       x_bala := x_bala + velocidade_x
+       y_bala := y_bala + velocidade_y
+
+       se  Relógio.milisegundos > (ms_bala + 1000) então
+
+        ms_bala := Relógio.milisegundos
+        ativo_bala := falso
+
+       fim
+
+      #se x_bala <= (inimigos_bala[1].x_IA +50) e x_bala >= (inimigos_bala[1].x_IA -50) e y_bala <= (inimigos_bala[1].y_IA +50) e y_bala >= (inimigos_bala[1].y_IA -50) entao
+
+         #inimigos_bala[1].ativo_IA := falso
+         #inimigo_bala.x_IA
+    #  fim
+
+
+       #desenha sprite do tiro
+       sprites_bala[1].desenhe_centralizado(x_bala, y_bala, 1,0,1,1)
+     fim
+  fim
+
+fim

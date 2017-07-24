@@ -1,0 +1,3 @@
+tipo mapa
+  largura, altura: Inteiro
+fim
