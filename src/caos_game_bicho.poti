@@ -1,0 +1,247 @@
+use "jerimum"
+
+var ms = Relógio.milisegundos
+
+var pontos = 0
+var tempo = 0
+
+use "inimigo.poti"
+use "bala.poti"
+use "jogador.poti"
+
+tipo mapa
+  largura, altura: Inteiro
+fim
+
+var menu = verdadeiro
+var final = falso
+var fase = falso
+
+# Imagens ======================================================================
+
+menu_cg = Imagem("imgs/main-cg.png")
+final_cg = Imagem("imgs/fim-cg.png")
+arma_i = Imagem("imgs/arma.png")
+mira_i = Imagem("imgs/mira.png")
+#bala_i = Imagem("imgs/bala.png").fatie(32, 32)
+bg_i = Imagem("imgs/bg.png")
+coracao_jogador = Imagem("imgs/coracao.png").fatie(64, 64)
+
+# Objetos ======================================================================
+
+jogador = Jogador (320,240)
+jogador_sprites = Imagem("imgs/player.png").fatie(64, 64)
+jogador.coloque_sprite(jogador_sprites[1])
+jogador.coloque_sptrites(Imagem("imgs/player.png"),64, 64)
+jogador.coloque_sprite_arma(arma_i)
+jogador.coloque_sprite_mira(mira_i)
+
+var inimigos_IA = Lista(10,Inimigo).mutável
+
+var ini_1 = Inimigo(30,30, 1,jogador)
+ini_1.sprites_IA  := Imagem("imgs/bixo.png").fatie(16, 16)
+ini_1.ativo_IA := falso
+
+var ini_2 = Inimigo(30,30, 1,jogador)
+ini_2.sprites_IA  := Imagem("imgs/bixo.png").fatie(16, 16)
+ini_2.ativo_IA := falso
+
+
+var ini_3 = Inimigo(30,30, 1,jogador)
+ini_3.sprites_IA  := Imagem("imgs/bixo.png").fatie(16, 16)
+ini_3.ativo_IA := falso
+
+
+var ini_4 = Inimigo(30,30, 1,jogador)
+ini_4.sprites_IA  := Imagem("imgs/bixo.png").fatie(16, 16)
+ini_4.ativo_IA := falso
+
+
+var ini_5 = Inimigo(30,30, 1,jogador)
+ini_5.sprites_IA  := Imagem("imgs/bixo.png").fatie(16, 16)
+ini_5.ativo_IA := falso
+
+
+var ini_6 = Inimigo(30,30, 1,jogador)
+ini_6.sprites_IA  := Imagem("imgs/bixo.png").fatie(16, 16)
+ini_6.ativo_IA := falso
+
+var ini_7 = Inimigo(30,30, 1,jogador)
+ini_7.sprites_IA  := Imagem("imgs/bixo.png").fatie(16, 16)
+ini_7.ativo_IA := falso
+
+
+var ini_8 = Inimigo(30,30, 1,jogador)
+ini_8.sprites_IA  := Imagem("imgs/bixo.png").fatie(16, 16)
+ini_8.ativo_IA := falso
+
+
+var ini_9 = Inimigo(30,30, 1,jogador)
+ini_9.sprites_IA  := Imagem("imgs/bixo.png").fatie(16, 16)
+ini_9.ativo_IA := falso
+
+
+var ini_10 = Inimigo(30,30, 1,jogador)
+ini_10.sprites_IA  := Imagem("imgs/bixo.png").fatie(16, 16)
+ini_10.ativo_IA := falso
+
+
+
+##LOGICA########################################################################
+atualize()   # Código para atualizar o jogo
+
+# Menu -----------------------------------------------------------------------
+  se menu == verdadeiro e fase == falso e final == falso então
+
+    se Mouse.BOTAO_ESQUERDO e Relógio.milisegundos  > ms + 1000 então
+      menu := falso
+      fase := verdadeiro
+      final := falso
+      ms := Relógio.milisegundos
+
+      # jogador =============
+
+      # estatus iniciasi do jogador
+      pontos := 0
+      jogador.vidas := 3
+
+      jogador.x := (1024/2).arredonde
+      jogador.y := (760/2).arredonde
+
+      # inimigos =============
+      #...
+
+     var rand_x = aleatorio(10, 1014)
+     var rand_y = aleatorio(10, 750)
+
+     enquanto rand_x > jogador.x - 400 e rand_x < jogador.x - 400 e rand_y > jogador.y - 400 e rand_y < jogador.y - 400 faça
+       rand_x := aleatorio(10, 1014)
+       rand_y := aleatorio(10, 750)
+     fim
+
+        ini_1.x_IA := aleatorio(10, 1014)
+        ini_1.x_IA := aleatorio(10, 750)
+        ini_1.ativo_IA := verdadeiro
+
+        enquanto rand_x > jogador.x - 400 e rand_x < jogador.x - 400 e rand_y > jogador.y - 400 e rand_y < jogador.y - 400 faça
+          rand_x := aleatorio(10, 1014)
+          rand_y := aleatorio(10, 750)
+        fim
+
+           ini_2.x_IA := rand_x
+           ini_2.x_IA := rand_y
+           ini_2.ativo_IA := verdadeiro
+
+
+
+
+      #jogador.b.inimigos_bala.insira(1,ini_1)
+      #jogador.b.inimigos_bala[1] := ini_1
+
+
+    fim
+
+    # Tela de inicio
+    menu_cg.desenhe(0, 0, 1)
+    #escreva "Menu"
+
+  fim#--------------------------------------------------------------------------
+
+  # Fase -----------------------------------------------------------------------
+  se fase == verdadeiro e menu == falso e final == falso então
+
+    se jogador.vidas == 0 e Relógio.milisegundos  > ms + 1000 então
+      menu := falso
+      fase := falso
+      final := verdadeiro
+      ms := Relógio.milisegundos
+    fim
+
+    # desenha o plani de fundo
+    bg_i.desenhe(0, 0, 0)
+
+    # jogador ===============
+
+    # enqianto o jogador ainda possuir vidas
+    se jogador.vidas>0 então
+      jogador.atualize()
+    fim
+
+    # inimigos ===============
+    # ...
+
+    #ini_1.ativo_IA := verdadeiro
+    ini_1.atualize()
+    ini_1.colisao_IA(jogador.x, jogador.y)
+
+
+    se jogador.b.ativo_bala == verdadeiro e jogador.b.x_bala <= (ini_1.x_IA +50) e jogador.b.x_bala >= (ini_1.x_IA -50) e jogador.b.y_bala <= (ini_1.y_IA +50) e jogador.b.x_bala >= (ini_1.y_IA -50) entao
+
+      ini_1.ativo_IA := falso
+      jogador.b.ativo_bala := falso
+      pontos := pontos + 1
+      escreva "pontos: {pontos}"
+
+    fim
+
+    ini_2.atualize()
+    ini_2.colisao_IA(jogador.x, jogador.y)
+
+
+    se jogador.b.ativo_bala == verdadeiro e jogador.b.x_bala <= (ini_2.x_IA +50) e jogador.b.x_bala >= (ini_2.x_IA -50) e jogador.b.y_bala <= (ini_2.y_IA +50) e jogador.b.x_bala >= (ini_2.y_IA -50) entao
+
+      ini_2.ativo_IA := falso
+      jogador.b.ativo_bala := falso
+      pontos := pontos + 1
+      escreva "pontos: {pontos}"
+
+    fim
+
+    # GUI =====================
+      escolha jogador.vidas
+        caso 3 => coracao_jogador[2].desenhe_centralizado(64,30,5)
+                  coracao_jogador[2].desenhe_centralizado(128,30,5)
+                  coracao_jogador[2].desenhe_centralizado(192,30,5)
+        caso 2 => coracao_jogador[2].desenhe_centralizado(64,30,5)
+                  coracao_jogador[2].desenhe_centralizado(128,30,5)
+                  coracao_jogador[1].desenhe_centralizado(192,30,5)
+        caso 1 => coracao_jogador[2].desenhe_centralizado(64,30,5)
+                  coracao_jogador[1].desenhe_centralizado(128,30,5)
+                  coracao_jogador[1].desenhe_centralizado(192,30,5)
+        caso 0 => escreva "fim de jogo"
+      fim
+
+
+  fim#--------------------------------------------------------------------------
+
+  # Fim ------------------------------------------------------------------------
+  se fase == falso e menu == falso e final == verdadeiro então
+
+    se Mouse.BOTAO_ESQUERDO e Relógio.milisegundos  > ms + 1000 então
+      menu := verdadeiro
+      fase := falso
+      final := falso
+      ms := Relógio.milisegundos
+
+      # jogador ======================
+
+      # restauda a vida do jogador
+      jogador.vidas := 3
+      # reposiciona o jogador no centro da tela
+      jogador.x := (1024/2).arredonde
+      jogador.y := (760/2).arredonde
+
+      # inimigos ======================
+      ini_1.ativo_IA := falso
+      ini_2.ativo_IA := falso
+
+    fim
+
+  # desenha a tela de fim de jogo
+  final_cg.desenhe(0, 0, 1)
+
+  fim#--------------------------------------------------------------------------
+
+fim
+
+jogo.iniciar("CaosGame - Rogue Like 2D", 1024, 760, atualize, 30)
