@@ -175,7 +175,7 @@ atualize()   # Código para atualizar o jogo
     ini_1.colisao_IA(jogador.x, jogador.y)
 
 
-    se jogador.b.ativo_bala == verdadeiro e jogador.b.x_bala <= (ini_1.x_IA +50) e jogador.b.x_bala >= (ini_1.x_IA -50) e jogador.b.y_bala <= (ini_1.y_IA +50) e jogador.b.x_bala >= (ini_1.y_IA -50) entao
+    se jogador.b.ativo_bala == verdadeiro e ini_1.ativo_IA == verdadeiro e jogador.b.x_bala <= (ini_1.x_IA +50) e jogador.b.x_bala >= (ini_1.x_IA -50) e jogador.b.y_bala <= (ini_1.y_IA +50) e jogador.b.x_bala >= (ini_1.y_IA -50) entao
 
       ini_1.ativo_IA := falso
       jogador.b.ativo_bala := falso
@@ -188,7 +188,7 @@ atualize()   # Código para atualizar o jogo
     ini_2.colisao_IA(jogador.x, jogador.y)
 
 
-    se jogador.b.ativo_bala == verdadeiro e jogador.b.x_bala <= (ini_2.x_IA +50) e jogador.b.x_bala >= (ini_2.x_IA -50) e jogador.b.y_bala <= (ini_2.y_IA +50) e jogador.b.x_bala >= (ini_2.y_IA -50) entao
+    se jogador.b.ativo_bala == verdadeiro e ini_2.ativo_IA == verdadeiro e jogador.b.x_bala <= (ini_2.x_IA +50) e jogador.b.x_bala >= (ini_2.x_IA -50) e jogador.b.y_bala <= (ini_2.y_IA +50) e jogador.b.x_bala >= (ini_2.y_IA -50) entao
 
       ini_2.ativo_IA := falso
       jogador.b.ativo_bala := falso
