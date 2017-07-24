@@ -17,4 +17,4 @@ Jerimum-Rogue e um jogo inspirado no estilço roguelike onde seu pernoangem tem 
 
 # Site do projeto: 
 
-* https://saulodfp.github.io/jerimum-rogue/index.html
+* https://saulodfp.github.io/jerimum-rogue
