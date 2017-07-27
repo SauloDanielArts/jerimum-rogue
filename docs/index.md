@@ -7,7 +7,7 @@ Jerimum-Rogue e um game feito utilizando a linguagem de programação simples e 
 
 # Descrição:
 
-Jerimum-Rogue e um jogo inspirado no estilo rogue-like onde seu personagem tem que sobreviver e ataca uma de uma orda de inimigos aleatorios. Inicialmente está sendo desenvolvido para um trabalho da disciplina de programação de computadores da turma IFRN.2017.1.M orientado pelo professor Leonardo Lucena.
+Jerimum-Rogue e um jogo inspirado no estilo rogue-like onde seu personagem tem que sobreviver ao ataque de uma orda de inimigos. Inicialmente está sendo desenvolvido para um trabalho da disciplina de programação de computadores da turma IFRN.2017.1.M orientado pelo professor Leonardo Lucena.
 
 # Instruções:
 
