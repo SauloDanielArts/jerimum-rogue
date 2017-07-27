@@ -12,10 +12,12 @@ Jerimum-Rogue e um jogo inspirado no estilo rogue-like onde seu personagem tem q
 
 ## Instruções:
 
-Pressione a tecla esquerda do mouse para iniciar o jogo;
-Utilize o mouse para mirar nos inimigos e precione a tecla esquerda para atirar;
-Tente sobreviver o maximo o possível aos constantes ataques dos inimigos.
-Desenvolvedores
+* Pressione a tecla esquerda do mouse para iniciar o jogo;
+* Utilize o mouse para mirar nos inimigos e precione a tecla esquerda para atirar;
+* Tente sobreviver o maximo o possível aos constantes ataques dos inimigos.
+
+
+## Desenvolvedores:
 
 * Saulo Daniel Fereira Pontes
 * Paulo Robson Freire Barbosa
