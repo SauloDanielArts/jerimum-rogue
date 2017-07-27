@@ -120,7 +120,7 @@ atualize()   # Código para atualizar o jogo
      fim
 
         ini_1.x_IA := aleatorio(10, 1014)
-        ini_1.x_IA := aleatorio(10, 750)
+        ini_1.y_IA := aleatorio(10, 750)
         ini_1.ativo_IA := verdadeiro
 
         enquanto rand_x > jogador.x - 400 e rand_x < jogador.x - 400 e rand_y > jogador.y - 400 e rand_y < jogador.y - 400 faça
@@ -128,11 +128,82 @@ atualize()   # Código para atualizar o jogo
           rand_y := aleatorio(10, 750)
         fim
 
-           ini_2.x_IA := rand_x
-           ini_2.x_IA := rand_y
+           ini_2.x_IA := aleatorio(10, 1014)
+           ini_2.y_IA := aleatorio(10, 750)
            ini_2.ativo_IA := verdadeiro
 
+           enquanto rand_x > jogador.x - 400 e rand_x < jogador.x - 400 e rand_y > jogador.y - 400 e rand_y < jogador.y - 400 faça
+             rand_x := aleatorio(10, 1014)
+             rand_y := aleatorio(10, 750)
+           fim
 
+           ini_3.x_IA := aleatorio(10, 1014)
+           ini_3.y_IA := aleatorio(10, 750)
+              ini_3.ativo_IA := verdadeiro
+
+              enquanto rand_x > jogador.x - 400 e rand_x < jogador.x - 400 e rand_y > jogador.y - 400 e rand_y < jogador.y - 400 faça
+                rand_x := aleatorio(10, 1014)
+                rand_y := aleatorio(10, 750)
+              fim
+
+              ini_4.x_IA := aleatorio(10, 1014)
+              ini_4.y_IA := aleatorio(10, 750)
+                 ini_4.ativo_IA := verdadeiro
+
+                 enquanto rand_x > jogador.x - 400 e rand_x < jogador.x - 400 e rand_y > jogador.y - 400 e rand_y < jogador.y - 400 faça
+                   rand_x := aleatorio(10, 1014)
+                   rand_y := aleatorio(10, 750)
+                 fim
+
+                 ini_5.x_IA := aleatorio(10, 1014)
+                 ini_5.y_IA := aleatorio(10, 750)
+                    ini_5.ativo_IA := verdadeiro
+
+
+                    enquanto rand_x > jogador.x - 400 e rand_x < jogador.x - 400 e rand_y > jogador.y - 400 e rand_y < jogador.y - 400 faça
+                      rand_x := aleatorio(10, 1014)
+                      rand_y := aleatorio(10, 750)
+                    fim
+
+                    ini_6.x_IA := aleatorio(10, 1014)
+                    ini_6.y_IA := aleatorio(10, 750)
+                       ini_6.ativo_IA := verdadeiro
+
+                       enquanto rand_x > jogador.x - 400 e rand_x < jogador.x - 400 e rand_y > jogador.y - 400 e rand_y < jogador.y - 400 faça
+                         rand_x := aleatorio(10, 1014)
+                         rand_y := aleatorio(10, 750)
+                       fim
+
+                       ini_7.x_IA := aleatorio(10, 1014)
+                       ini_7.y_IA := aleatorio(10, 750)
+                          ini_7.ativo_IA := verdadeiro
+
+                          enquanto rand_x > jogador.x - 400 e rand_x < jogador.x - 400 e rand_y > jogador.y - 400 e rand_y < jogador.y - 400 faça
+                            rand_x := aleatorio(10, 1014)
+                            rand_y := aleatorio(10, 750)
+                          fim
+
+                          ini_8.x_IA := aleatorio(10, 1014)
+                          ini_8.y_IA := aleatorio(10, 750)
+                             ini_8.ativo_IA := verdadeiro
+
+                             enquanto rand_x > jogador.x - 400 e rand_x < jogador.x - 400 e rand_y > jogador.y - 400 e rand_y < jogador.y - 400 faça
+                               rand_x := aleatorio(10, 1014)
+                               rand_y := aleatorio(10, 750)
+                             fim
+
+                             ini_9.x_IA := aleatorio(10, 1014)
+                             ini_9.y_IA := aleatorio(10, 750)
+                                ini_9.ativo_IA := verdadeiro
+
+                                enquanto rand_x > jogador.x - 400 e rand_x < jogador.x - 400 e rand_y > jogador.y - 400 e rand_y < jogador.y - 400 faça
+                                  rand_x := aleatorio(10, 1014)
+                                  rand_y := aleatorio(10, 750)
+                                fim
+
+                                ini_10.x_IA := aleatorio(10, 1014)
+                                ini_10.y_IA := aleatorio(10, 750)
+                                   ini_10.ativo_IA := verdadeiro
 
 
       #jogador.b.inimigos_bala.insira(1,ini_1)
@@ -197,6 +268,111 @@ atualize()   # Código para atualizar o jogo
 
     fim
 
+    ini_3.atualize()
+    ini_3.colisao_IA(jogador.x, jogador.y)
+
+
+    se jogador.b.ativo_bala == verdadeiro e ini_3.ativo_IA == verdadeiro e jogador.b.x_bala <= (ini_3.x_IA +50) e jogador.b.x_bala >= (ini_3.x_IA -50) e jogador.b.y_bala <= (ini_3.y_IA +50) e jogador.b.x_bala >= (ini_3.y_IA -50) entao
+
+      ini_3.ativo_IA := falso
+      jogador.b.ativo_bala := falso
+      pontos := pontos + 1
+      escreva "pontos: {pontos}"
+
+    fim
+
+    ini_4.atualize()
+    ini_4.colisao_IA(jogador.x, jogador.y)
+
+
+    se jogador.b.ativo_bala == verdadeiro e ini_4.ativo_IA == verdadeiro e jogador.b.x_bala <= (ini_4.x_IA +50) e jogador.b.x_bala >= (ini_4.x_IA -50) e jogador.b.y_bala <= (ini_4.y_IA +50) e jogador.b.x_bala >= (ini_4.y_IA -50) entao
+
+      ini_4.ativo_IA := falso
+      jogador.b.ativo_bala := falso
+      pontos := pontos + 1
+      escreva "pontos: {pontos}"
+
+    fim
+
+    ini_5.atualize()
+    ini_5.colisao_IA(jogador.x, jogador.y)
+
+
+    se jogador.b.ativo_bala == verdadeiro e ini_5.ativo_IA == verdadeiro e jogador.b.x_bala <= (ini_5.x_IA +50) e jogador.b.x_bala >= (ini_5.x_IA -50) e jogador.b.y_bala <= (ini_5.y_IA +50) e jogador.b.x_bala >= (ini_5.y_IA -50) entao
+
+      ini_5.ativo_IA := falso
+      jogador.b.ativo_bala := falso
+      pontos := pontos + 1
+      escreva "pontos: {pontos}"
+
+    fim
+
+    ini_6.atualize()
+    ini_6.colisao_IA(jogador.x, jogador.y)
+
+
+    se jogador.b.ativo_bala == verdadeiro e ini_6.ativo_IA == verdadeiro e jogador.b.x_bala <= (ini_6.x_IA +50) e jogador.b.x_bala >= (ini_6.x_IA -50) e jogador.b.y_bala <= (ini_6.y_IA +50) e jogador.b.x_bala >= (ini_6.y_IA -50) entao
+
+      ini_6.ativo_IA := falso
+      jogador.b.ativo_bala := falso
+      pontos := pontos + 1
+      escreva "pontos: {pontos}"
+
+    fim
+
+    ini_7.atualize()
+    ini_7.colisao_IA(jogador.x, jogador.y)
+
+
+    se jogador.b.ativo_bala == verdadeiro e ini_7.ativo_IA == verdadeiro e jogador.b.x_bala <= (ini_7.x_IA +50) e jogador.b.x_bala >= (ini_7.x_IA -50) e jogador.b.y_bala <= (ini_7.y_IA +50) e jogador.b.x_bala >= (ini_7.y_IA -50) entao
+
+      ini_7.ativo_IA := falso
+      jogador.b.ativo_bala := falso
+      pontos := pontos + 1
+      escreva "pontos: {pontos}"
+
+    fim
+
+    ini_8.atualize()
+    ini_8.colisao_IA(jogador.x, jogador.y)
+
+
+    se jogador.b.ativo_bala == verdadeiro e ini_8.ativo_IA == verdadeiro e jogador.b.x_bala <= (ini_8.x_IA +50) e jogador.b.x_bala >= (ini_8.x_IA -50) e jogador.b.y_bala <= (ini_8.y_IA +50) e jogador.b.x_bala >= (ini_8.y_IA -50) entao
+
+      ini_8.ativo_IA := falso
+      jogador.b.ativo_bala := falso
+      pontos := pontos + 1
+      escreva "pontos: {pontos}"
+
+    fim
+
+    ini_9.atualize()
+    ini_9.colisao_IA(jogador.x, jogador.y)
+
+
+    se jogador.b.ativo_bala == verdadeiro e ini_9.ativo_IA == verdadeiro e jogador.b.x_bala <= (ini_9.x_IA +50) e jogador.b.x_bala >= (ini_9.x_IA -50) e jogador.b.y_bala <= (ini_9.y_IA +50) e jogador.b.x_bala >= (ini_9.y_IA -50) entao
+
+      ini_9.ativo_IA := falso
+      jogador.b.ativo_bala := falso
+      pontos := pontos + 1
+      escreva "pontos: {pontos}"
+
+    fim
+
+    ini_10.atualize()
+    ini_10.colisao_IA(jogador.x, jogador.y)
+
+
+    se jogador.b.ativo_bala == verdadeiro e ini_10.ativo_IA == verdadeiro e jogador.b.x_bala <= (ini_10.x_IA +50) e jogador.b.x_bala >= (ini_10.x_IA -50) e jogador.b.y_bala <= (ini_10.y_IA +50) e jogador.b.x_bala >= (ini_10.y_IA -50) entao
+
+      ini_10.ativo_IA := falso
+      jogador.b.ativo_bala := falso
+      pontos := pontos + 1
+      escreva "pontos: {pontos}"
+
+    fim
+
+
     # GUI =====================
       escolha jogador.vidas
         caso 3 => coracao_jogador[2].desenhe_centralizado(64,30,5)
@@ -241,6 +417,14 @@ atualize()   # Código para atualizar o jogo
       # inimigos ======================
       ini_1.ativo_IA := falso
       ini_2.ativo_IA := falso
+      ini_3.ativo_IA := falso
+      ini_4.ativo_IA := falso
+      ini_5.ativo_IA := falso
+      ini_6.ativo_IA := falso
+      ini_7.ativo_IA := falso
+      ini_8.ativo_IA := falso
+      ini_9.ativo_IA := falso
+      ini_10.ativo_IA := falso
 
     fim
 
