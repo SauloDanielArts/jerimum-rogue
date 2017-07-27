@@ -211,6 +211,13 @@ atualize()   # Código para atualizar o jogo
         caso 0 => escreva "fim de jogo"
       fim
 
+   #Pontos=======================
+   f = Fonte(32)
+   f_x = 800
+   f_y = 36
+   f.desenhe("Pontos: {pontos}", f_x, f_y, 2, Cor.BRANCO)
+   f.desenhe("Pontos: {pontos}", f_x+2, f_y+2, 2, Cor.PRETO)
+   #==========================
 
   fim#--------------------------------------------------------------------------
 
