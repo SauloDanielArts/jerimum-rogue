@@ -388,12 +388,50 @@ atualize()   # Código para atualizar o jogo
       fim
 
    #Pontos=======================
-   f = Fonte(32)
+   var f = Fonte(32)
    f_x = 800
    f_y = 36
    f.desenhe("Pontos: {pontos}", f_x, f_y, 2, Cor.BRANCO)
    f.desenhe("Pontos: {pontos}", f_x+2, f_y+2, 2, Cor.PRETO)
    #==========================
+
+   se pontos >= 10 entao
+     f = Fonte(80)
+     f_x = (1024/4).arredonde
+     f_y = (760/2).arredonde
+     f.desenhe("Voce venceu!", f_x, f_y, 5, Cor.AMARELO)
+     f.desenhe("voce venceu!", f_x+2, f_y+2, 5, Cor.PRETO)
+
+     se Mouse.BOTAO_ESQUERDO e Relógio.milisegundos  > ms + 1000 então
+       menu := verdadeiro
+       fase := falso
+       final := falso
+       ms := Relógio.milisegundos
+
+       # jogador ======================
+
+       # restauda a vida do jogador
+       jogador.vidas := 3
+       # reposiciona o jogador no centro da tela
+       jogador.x := (1024/2).arredonde
+       jogador.y := (760/2).arredonde
+
+       # inimigos ======================
+       ini_1.ativo_IA := falso
+       ini_2.ativo_IA := falso
+       ini_3.ativo_IA := falso
+       ini_4.ativo_IA := falso
+       ini_5.ativo_IA := falso
+       ini_6.ativo_IA := falso
+       ini_7.ativo_IA := falso
+       ini_8.ativo_IA := falso
+       ini_9.ativo_IA := falso
+       ini_10.ativo_IA := falso
+
+     fim
+
+
+   fim
 
   fim#--------------------------------------------------------------------------
 
