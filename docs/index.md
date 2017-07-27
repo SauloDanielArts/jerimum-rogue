@@ -1,6 +1,6 @@
 # Jerimum-Rogue (CaosGame - Rogue Like 2D)
 
-Jerimum-Rogue e um game feito utilizando a linguagem de programação simples e didatica chamada Potigol, disponível em: 
+Jerimum-Rogue e um game feito utilizando a linguagem de programação simples e didática chamada Potigol, disponível em: 
 
 * http://potigol.github.io
 * https://potigol.github.io/Jerimum
